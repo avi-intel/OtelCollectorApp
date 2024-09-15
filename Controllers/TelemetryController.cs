@@ -60,7 +60,7 @@ namespace OtelCollectorApp.Controllers
             var transformedData = data.Select(d => new
             {
                 time = ((DateTimeOffset)d.Timestamp).ToUnixTimeMilliseconds(),
-                value = d.Data
+                value = JsonSerializer.Deserialize<JsonElement>(d.Data)
             }).ToList();
 
             return Ok(transformedData);
